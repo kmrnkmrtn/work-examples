@@ -1,0 +1,96 @@
+body {
+    font-family: Verdana, Arial, sans-serif;
+    background-color: #31e4ab;
+    color: #ffffff;
+}
+
+table,
+td {
+    background-color: #5d74ce;
+    border: 1px solid #31e4ab; 
+    border-collapse:collapse;
+    min-width: 30px;
+    height: 30px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 23px;
+    margin: auto;
+
+}
+
+.game {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    
+    transform: translate(-50%, -50%);
+
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #5d74ce;
+
+}
+.menu {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    
+    transform: translate(-50%, -50%);
+
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #5d74ce;
+
+}
+.scoreboard{
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    border-radius: 10px;
+    padding: 20px;
+    background-color: blueviolet;
+}
+.side p{
+    margin:auto;
+    position: absolute;
+    left: 5%;
+    font-weight: bold;
+    color: lime;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: blueviolet;
+    border-radius: 10px;
+    padding: 20px;
+    
+
+}
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    color: #000000;
+    margin-bottom: 10px;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 0;
+}
+.screen{
+
+    margin-bottom: 1em;
+    font-weight: bold;
+    color: lime;
+    font-size: large;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: blueviolet;
+    
+}
