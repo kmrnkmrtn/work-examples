@@ -1,143 +1,53 @@
-import sys,json
+from socket import socket,AF_INET, SOCK_STREAM, timeout, SOL_SOCKET, SO_REUSEADDR
+import struct
+import sys
+import math
+import time
+import random
 
-fileName = sys.argv[1]
+serverarg = sys.argv[1]
+portarg = int(sys.argv[2])
+
+mini = 1;
+maxi = 100;    
 
 
-with open(fileName,"r") as f:
-    cs1 = json.load(f)
+server_addr = (serverarg, portarg)
+packer = struct.Struct('ci')
 
-endpoints = cs1["end-points"]
-switches = cs1["switches"]
-links = cs1["links"]
-circuits = cs1["possible-circuits"]
-duration = cs1["simulation"]["duration"]
-demands = cs1["simulation"]["demands"]
-
-def routeExists(endU, endV):
-    allRoutesBetween2Endpoints = []
-    for route in circuits:
-        if (route[0] == endU and route[len(route)-1] == endV):
-         
-                allRoutesBetween2Endpoints.append(route)
+with socket(AF_INET, SOCK_STREAM) as client:
+    client.connect(server_addr)
+    
+    try:
+        while(True):
+            time.sleep(random.randint(0,2))
+            slicepoint = math.floor((maxi+mini)/2)
             
-    if(len(allRoutesBetween2Endpoints)==0):
-         return False
-    else:
-         return allRoutesBetween2Endpoints
-    
-edges = []
-caps = []
-conns = {}
-
-for i in links:
-    edge = ''.join(i["points"])
-    edges.append(edge)
-    revedge = ''.join(i["points"][::-1])
-
-    edges.append(revedge)
-    
-for i in links:
-     cap = i["capacity"]
-     caps.append(cap)
-     caps.append(cap)
-
-for key in edges:
-     for value in caps:
-          conns[key] = value
-
-def makeEdgeRoute(route):
-    edgeRoute = []
-    endU = route[0] 
-    endV = route[1]
-    for node in route:
-        if(node != route[0]):
-            endV = node
-        if(endV != endU):    
-            edge = endU+";"+endV
-            edgeRoute.append(edge)
-        endU = endV 
-    return edgeRoute
-
-linkStatus = {}
-for link in links:
-    edge = ';'.join(link["points"])
-    linkStatus[edge] = False
-
-def routeIsFree(route):
-    for link in route:
-        if(linkStatus[link] == True):
-            return False
-          
-    return True
-     
-def findFreeRoute(endU,endV):
-    possibleRoutes = routeExists(endU, endV)
-
-
-    for i in possibleRoutes:
-        
-        if(routeIsFree(makeEdgeRoute(i))):
-               return i
-         
-    return False
-
-
-
-
-def reserveRoute(route):
-    for i in route:
-        linkStatus[i] = True
-
-def freeRoute(route):
-    for i in route:
-        linkStatus[i] = False
-    
-
-reservedRoutes = {}
-
-actionCount = 0;
-for i in range(duration):
-    currentTime = i+1
-    for j in demands:
-        
-        if(j['start-time'] == currentTime):
-            actionCount+= 1
-
-           
-            route = findFreeRoute(j['end-points'][0],j['end-points'][1])
-            if(route):
-                reserveRoute(makeEdgeRoute(route))
-                key = ';'.join(j["end-points"])
-                reservedRoutes[key] = route
-                print("%d. igény foglalás: " % actionCount + j['end-points'][0]+"<->"+j['end-points'][1]+" st:%d"%currentTime+" - sikeres")
-               
-              
+            if((mini+1) == maxi):
+                packed_data = packer.pack('='.encode(),maxi)
+                client.sendall(packed_data)
             else:
-                print("%d. igény foglalás: " % actionCount + j['end-points'][0]+"<->"+j['end-points'][1]+" st:%d"%currentTime+" - sikertelen")
-               
-        if(j['end-time'] == currentTime):
-            actionCount+= 1
-            if(not all(value == False for value in linkStatus.values())):
-                print("%d. igény felszabadítás: " % actionCount + j['end-points'][0]+"<->"+j['end-points'][1]+" st:%d"%currentTime)
+                packed_data = packer.pack('>'.encode(),slicepoint)
+                client.sendall(packed_data)
+            print(packed_data)
+            data = client.recv(packer.size)
+            resp, _ = packer.unpack(data)
+            resp = resp.decode()
+            print(resp);
+            if resp == 'Y':
+                print("win")
+                break
+            if(resp == 'K'):
+                break
+            elif(resp == 'V'):
+                break
+            elif(resp == 'I'):
+                mini = slicepoint
+                print(mini)
+
             
-                
-                key = ';'.join(j["end-points"])
-                if(reservedRoutes.get(key) != None):
-                    toFree = reservedRoutes[key]    
-                    freeRoute(makeEdgeRoute(toFree))
-                    del(reservedRoutes[key])
-                
-               
-        
-
-
-
-    
-
-
-
-    
-
-        
-
-     
+            elif(resp == 'N'):
+                maxi = slicepoint
+                print(maxi)
+    except KeyboardInterrupt:
+        print("KLIENS LEALL")
