@@ -1,0 +1,172 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Exo 2', sans-serif;
+}
+.ugras a {
+    position: absolute;
+    left: -9999px;
+}
+body{
+    color: #ade3f0;
+    min-height : 100vh;
+    width: 100%;
+    background-color:rgba(4,9,30,1);
+    background-position: center;
+    background-size: cover;
+    position: relative; 
+}
+a:visited { 
+    color: #ade3f0;
+}
+a:hover {
+    color: yellow;
+}
+h1{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 3em;
+    text-align: center; 
+}
+h2{
+    font-size: 2em;
+}
+p{
+    font-size: 1.3em;
+    text-align: left;
+}
+img{
+    border: 2.5px solid #ade3f0;  
+    border-radius: 1.1em;
+    display: block;
+    height: 22%;
+    width: 22%;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: auto;
+    margin-right: auto;
+    transition: 0.4s;
+      
+}
+img:hover{
+    transition: 1.4s;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    width: 55%;
+    height: 55%;
+    
+}video{
+    border: 2.5px solid #ade3f0;  
+    border-radius: 1.1em;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+.exper{
+    margin-top: 3em;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%
+
+}
+hr{
+  
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;  
+}
+.fa-solid{
+    position: absolute;
+    top: 0.5em;
+    left: 0.5em;
+    display: block;
+    text-align: left;
+    padding: 1em 1em 1em 1em ;
+}
+.toText{
+   font-size: 2em;
+   
+}
+footer{
+   
+    color: #ade3f0;
+    position: relative;
+    margin: 2em;
+    display: block;
+}
+figcaption{
+    padding: 1em;
+    text-align: center;
+    font-size: 1.3em;
+}
+
+
+/*navigaiton*/
+
+
+nav{
+    
+    display: flex;
+    padding-top: 1em;
+    justify-content: space-between;
+    align-items: center;
+}
+.nav-links{
+    flex: 1;
+    text-align: center;
+    
+}
+.nav-links ul li{
+    list-style: none;
+    display: inline-block;
+    padding: 1em 1em;
+    position: relative;
+    
+}
+.nav-links ul li a{
+    color: #ade3f0;
+    text-decoration: none;
+    font-size: 1.5em;
+   
+}
+.nav-links ul li::after{
+    content: '';
+    width: 0%;
+    height: 3px;
+    background: #5a5af2;
+    display: block;
+    margin: auto;
+    transition: 0.2s;
+}
+.nav-links ul li:hover::after{
+    width: 100%;
+}
+#curr{
+    font-weight: bold;
+}
+@media print{
+    body{
+    color: black; 
+    background-color:white;         
+    }
+    nav{
+        display: none;
+    }
+    a{
+        display: none;
+    }
+    footer{
+        display: none;
+    }
+    video{
+        display: none;
+    }
+    img{
+        height: 10%;
+    }
+}
+
+
+

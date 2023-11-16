@@ -1,0 +1,102 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Exo 2', sans-serif;
+}
+body{
+    background-color: black;
+    min-height : 100vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(4,9,30,0.7), rgba(4,9,30,0.7)), url(img/slime-mould.jpg);
+    background-position: center;
+    background-size: cover;
+    position: relative; 
+    color: #fff;
+}
+h1{
+    font-size: 3em;
+    text-align: center;
+    padding-bottom: 1em;
+}
+h2{
+    padding-top: 1em;
+}
+.fa-solid{
+    position: absolute;
+    top: 0.5em;
+    left: 0.5em;                
+    display: block;
+    text-align: left;
+    padding: 1em 1em 1em 1em ;
+}
+
+div#gombok {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.score{
+    padding: 20px;
+}nav{
+    
+    display: flex;
+    padding-top: 1em;
+    justify-content: space-between;
+    align-items: center;
+}
+.nav-links{
+    flex: 1;
+    text-align: center;
+    
+}
+.nav-links ul li{
+    list-style: none;
+    display: inline-block;
+    padding: 1em 1em;
+    position: relative;
+    
+}
+.nav-links ul li a{
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.5em;
+   
+}
+.nav-links ul li::after{
+    content: '';
+    width: 0%;
+    height: 3px;
+    background: #5a5af2;
+    display: block;
+    margin: auto;
+    transition: 0.2s;
+}
+.nav-links ul li:hover::after{
+    width: 100%;
+}#curr{
+    font-weight: bold;
+}@media print{
+    body{
+    background-image: none;
+    color: black; 
+    background-color:white;         
+    }
+    nav{
+        display: none;
+    }
+    button {
+       display: none;
+    }
+    a{
+        display: none;
+    }
+    footer{
+        display: none;
+    }
+    video{
+        display: none;
+    }
+    img{
+        height: 10%;
+    }
+}
