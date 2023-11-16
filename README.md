@@ -1,3 +1,3 @@
-# work-examples
+# work-examples Some examples of my works, in separate branches by project/language
 
-Some examples of my works, in separate branches by project/language
+
