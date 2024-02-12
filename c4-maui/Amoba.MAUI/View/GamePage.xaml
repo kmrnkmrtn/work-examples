@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Amoba.MAUI.ViewModel"
+             xmlns:view="clr-namespace:Amoba.MAUI"
+             x:Class="Amoba.MAUI.MainPage"
+             Title="Potyogós Amőba">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <view:StringToColorConverter x:Key="ColorConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid Margin="4" RowSpacing="8">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Button Text="New Game" Command="{Binding NewGameCommand}" CommandParameter="{Binding TableSizeViewModel.TableSize}" Grid.Row="0" HorizontalOptions="Start" />
+        <Button Text="Pause/start"  Command="{Binding PauseCommand}" Grid.Row="0" HorizontalOptions="Center"/>
+        <Button Text="Beállítások" Command="{Binding ExitCommand}" Grid.Row="0" HorizontalOptions="End" />
+
+            
+        <Grid
+             Grid.Row="1"
+             BindableLayout.ItemsSource="{Binding Fields}"
+             RowDefinitions="{Binding RowSize}"
+             ColumnDefinitions="{Binding ColSize}"
+             ColumnSpacing="2"
+             RowSpacing="2"
+             HorizontalOptions="Center"
+            > 
+            
+            <BindableLayout.ItemTemplate>
+                <DataTemplate>
+                    <Button
+                            Text="{Binding Text}"  Command="{Binding StepCommand}" 
+                            CommandParameter="{Binding Coord}"
+                            Grid.Row="{Binding X}"
+                            Grid.Column="{Binding Y}"
+                            Padding="0"
+                            TextColor="Aqua"
+                            FontAttributes="Bold"
+                            FontSize="Medium"
+                            
+                            VerticalOptions="FillAndExpand"
+                            HorizontalOptions="FillAndExpand"
+                            IsEnabled="{Binding IsEnabled}" Background="{Binding Color, Converter={StaticResource ColorConverter}}"/>
+
+
+
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </Grid>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Start" Grid.Row="3">
+            <Label Text="PlayerO time: " />
+            <Label Text="{Binding PlayerOTime}" />
+        </StackLayout>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="End" Grid.Row="3">
+            <Label Text="PlayerX time: " />
+            <Label Text="{Binding PlayerXTime}" />
+        </StackLayout>
+    </Grid>
+
+</ContentPage>

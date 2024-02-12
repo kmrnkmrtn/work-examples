@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Amoba.MAUI.View.SettingsPage"
+             Title="SettingsPage">
+    <StackLayout>
+        <Button Command="{Binding LoadCommand}" Text="Betöltés" />
+        <Button Command="{Binding SaveCommand}" Text="Mentés" />
+        <Picker
+            Title="Játéktábla kiválasztása:"
+            HorizontalTextAlignment="Center"
+            ItemsSource="{Binding TableSizes}"
+            ItemDisplayBinding="{Binding TableSizeText}"
+            SelectedItem="{Binding TableSizeViewModel}" />
+    </StackLayout>
+</ContentPage>
